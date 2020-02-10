@@ -1,0 +1,28 @@
+.camera {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #000;
+}
+
+.canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.canvas-img {
+    position: fixed;
+    top: -1;
+    left: -1;
+}
+ 
+.taked {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    margin-left: -125px;
+    width: 250px;
+    height: auto;
+    border: solid 5px #333;
+}
