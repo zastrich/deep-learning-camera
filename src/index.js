@@ -86,19 +86,32 @@ class App extends React.Component {
       // Draw the text last to ensure it's on top.
       ctx.fillStyle = "#000000";
       ctx.fillText(prediction.class, x, y);
-
-      if(!this.state.pote && prediction.class === "bottle" && prediction.score >= .9){
-        this.takePicture()
-      }
     });
+
+    if(predictions.filter(e => (e.class === "bottle" && e.score >= .5)).length >= 1){
+      this.takePicture()
+    }
+
+    if(predictions.filter(e => (e.class === "person" && e.score >= .6)).length >= 2){
+      this.takePicture()
+    }
   };
 
-  takePicture = () => {
-    let context = this.canvasRef.current.getContext("2d")
-            
-    context.drawImage(this.videoRef.current, 0, 0, window.innerWidth, window.innerHeight)
+  takePicture = (top = 0, left = 0, width = 0, height = 0) => {
+    if(top > 0 && width > 0){
+      let canvas = document.createElement("canvas")
+      canvas.setAttribute("width", width)
+      canvas.setAttribute("height", height)
+      let context = canvas.getContext("2d")
+      context.drawImage(this.videoRef.current, 0, 0, width, height, 0, 0, width, height)
+      this.setState({pictureB64: canvas.toDataURL('image/jpeg', 0.7)})
+    } else {
+      let context = this.canvasRef.current.getContext("2d")
+              
+      context.drawImage(this.videoRef.current, 0, 0, window.innerWidth, window.innerHeight)
 
-    this.setState({pictureB64: this.canvasRef.current.toDataURL()})
+      this.setState({pictureB64: this.canvasRef.current.toDataURL('image/jpeg', 0.7)})
+    }
   }
 
   render() {

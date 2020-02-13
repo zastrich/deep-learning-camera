@@ -19,10 +19,10 @@
  
 .taked {
     position: absolute;
-    bottom: 15px;
-    left: 50%;
-    margin-left: -125px;
-    width: 250px;
+    bottom: 5px;
+    right: 5px;
+    max-width: 20%;
+    width: auto;
     height: auto;
-    border: solid 5px #333;
+    border: solid 3px #333;
 }
